@@ -142,9 +142,28 @@ button:
     name: "${friendly_name} Restart"
     entity_category: config
 # Enable logging
+debug:
+  update_interval: 10s
+
+text_sensor:
+  - platform: debug
+    device:
+      name: "Device Info"
+
+sensor:
+  - platform: debug
+    free:
+      name: "Heap Free"
+    fragmentation:
+      name: "Heap Fragmentation"
+    block:
+      name: "Heap Max Block"
+    loop_time:
+      name: "Loop Time"
+
+# Logger must be at least debug (default)
 logger:
-  # level: VERY_VERBOSE
-  # level: VERBOSE
+  level: debug
 
 # Enable Home Assistant API
 api:
@@ -259,7 +278,6 @@ pn532_i2c:
         if (tag.has_ndef_message()) {
           ESP_LOGD("tagreader", "Found tag NDEF");
           auto message = tag.get_ndef_message();
-
           auto records = message->get_records();
           for (auto &record : records) {
             std::string payload = record->get_payload();
