@@ -257,6 +257,8 @@ pn532_i2c:
         id(url)="";
         id(info)="";
         if (tag.has_ndef_message()) {
+          ESP_LOGD("tagreader", "Found tag NDEF");
+          ESP_LOGD("tagreader", message);
           auto message = tag.get_ndef_message();
           auto records = message->get_records();
           for (auto &record : records) {
