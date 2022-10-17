@@ -281,7 +281,7 @@ pn532_i2c:
           auto records = message->get_records();
           for (auto &record : records) {
             std::string payload = record->get_payload();
-            ESP_LOGD("tagreader", payload);
+            ESP_LOGD("tagreader", %s,payload);
             std::string type = record->get_type();
             size_t hass = payload.find("https://www.home-assistant.io/tag/");
             size_t applemusic = payload.find("https://music.apple.com");
